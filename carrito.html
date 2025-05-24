@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito - Burban Clothing</title>
+  <link rel="stylesheet" href="css&scrip/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="carrito-page">
+  <header>
+    <div class="navbar">
+      <div class="logo">
+        <a href="index.html">
+          <img src="Imagenes/logo_transparente.png" alt="Burban Clothing Logo" />
+        </a>
+      </div>
+      <h1>Carrito de Compras</h1>
+    </div>
+  </header>
+
+  <main>
+    <div class="carrito-container" id="carritoContainer">
+      </div>
+    <button id="clearCartButton" class="clear-cart-btn">Vaciar Carrito</button>
+
+    <div id="deliveryDetails" class="delivery-details" style="display:none;">
+      <h2>Datos de Entrega</h2>
+      <form id="deliveryForm">
+          <label for="recipientName">Nombre de quien recibe:</label>
+          <input type="text" id="recipientName" required>
+  
+          <label for="contactNumber">Número de contacto:</label>
+          <input type="text" id="contactNumber" pattern="[0-9]{10}" minlength="10" maxlength="10" title="Por favor, introduce exactamente 10 dígitos numéricos." required>
+  
+          <label for="deliveryAddress">Dirección de entrega:</label>
+          <input type="text" id="deliveryAddress" required>
+  
+          <button type="submit" id="finalizePurchaseBtn">Finalizar Compra</button>
+      </form>
+  </div>
+
+    <div id="purchaseConfirmation" class="purchase-confirmation" style="display:none;">
+      <h2>¡Gracias por tu compra!</h2>
+      <p>Recuerda que el pago es contra entrega y se realizará en un máximo de 2 días hábiles.</p>
+      <p>Se le llamará al número registrado para confirmar la fecha y hora exacta de la entrega.</p>
+      <button id="continueShoppingBtn" class="continue-shopping-btn">Continuar Comprando</button>
+    </div>
+  </main>
+
+  <script>
+    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    const contenedor = document.getElementById("carritoContainer");
+    const clearCartButton = document.getElementById("clearCartButton");
+    const deliveryDetails = document.getElementById("deliveryDetails");
+    const deliveryForm = document.getElementById("deliveryForm");
+    const purchaseConfirmation = document.getElementById("purchaseConfirmation");
+    const finalizePurchaseBtn = document.getElementById("finalizePurchaseBtn");
+    const continueShoppingBtn = document.getElementById("continueShoppingBtn");
+    let total = 0;
+
+    function renderCart() {
+      contenedor.innerHTML = ''; // Clear existing content
+      total = 0;
+
+      if (carrito.length === 0) {
+        contenedor.innerHTML = '<p class="empty-cart-message">Tu carrito está vacío.</p>';
+        clearCartButton.style.display = 'none';
+        deliveryDetails.style.display = 'none'; // Hide delivery form if cart is empty
+      } else {
+        carrito.forEach((producto, index) => {
+          const div = document.createElement("div");
+          div.classList.add("producto-carrito");
+          div.innerHTML = `
+            <div>
+              <span class="producto-nombre">${producto.nombre}</span> -
+              <span class="producto-talla">Talla: ${producto.talla}</span> -
+              <span class="producto-color">Color: ${producto.color}</span>
+            </div>
+            <div class="producto-acciones">
+              <span class="producto-precio">$${producto.precio.toLocaleString()}</span>
+              <button class="eliminar-producto-btn" data-index="${index}"><i class="fas fa-trash-alt"></i></button>
+            </div>
+          `;
+          contenedor.appendChild(div);
+          total += producto.precio;
+        });
+
+        const totalDiv = document.createElement("div");
+        totalDiv.classList.add("total-carrito");
+        totalDiv.innerText = `Total: $${total.toLocaleString()}`;
+        contenedor.appendChild(totalDiv);
+
+        clearCartButton.style.display = 'block'; // Show clear cart button
+        deliveryDetails.style.display = 'block'; // Show delivery form
+      }
+    }
+
+    renderCart(); // Initial render
+
+    clearCartButton.addEventListener("click", () => {
+      if (confirm("¿Estás seguro de que quieres vaciar todo el carrito?")) {
+        localStorage.removeItem("carrito");
+        carrito.length = 0; // Clear the array as well
+        renderCart(); // Re-render the cart
+      }
+    });
+
+    contenedor.addEventListener("click", (event) => {
+      if (event.target.classList.contains("eliminar-producto-btn") || event.target.closest(".eliminar-producto-btn")) {
+        const button = event.target.closest(".eliminar-producto-btn");
+        const indexToRemove = parseInt(button.dataset.index);
+
+        if (confirm("¿Estás seguro de que quieres eliminar este producto del carrito?")) {
+          carrito.splice(indexToRemove, 1);
+          localStorage.setItem("carrito", JSON.stringify(carrito));
+          renderCart(); // Re-render the cart
+        }
+      }
+    });
+
+    deliveryForm.addEventListener("submit", (event) => {
+      event.preventDefault(); // Prevent default form submission
+
+      // Here you would typically send this data to a server
+      const recipientName = document.getElementById("recipientName").value;
+      const contactNumber = document.getElementById("contactNumber").value;
+      const deliveryAddress = document.getElementById("deliveryAddress").value;
+
+      console.log("Datos de la compra:");
+      console.log("Productos:", carrito);
+      console.log("Total:", total);
+      console.log("Nombre de quien recibe:", recipientName);
+      console.log("Número de contacto:", contactNumber);
+      console.log("Dirección de entrega:", deliveryAddress);
+
+      // Clear the cart after successful "purchase"
+      localStorage.removeItem("carrito");
+      carrito.length = 0; // Clear the array
+
+      // Hide cart and delivery details, show confirmation
+      contenedor.style.display = 'none';
+      clearCartButton.style.display = 'none';
+      deliveryDetails.style.display = 'none';
+      purchaseConfirmation.style.display = 'block';
+
+      // Clear the form fields
+      deliveryForm.reset();
+    });
+
+    continueShoppingBtn.addEventListener("click", () => {
+      window.location.href = "index.html"; // Redirect to the main page
+    });
+  </script>
+</body>
+</html>

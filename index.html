@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inicio - Estudio Fotográfico</title>
+  
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="css&scrip/style.css" />
+  
+  <!-- Font Awesome para íconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <!-- Botón menú hamburguesa (visible en móvil) -->
+      <button class="menu-toggle" aria-label="Abrir menú">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Menú izquierdo -->
+      <div class="nav-left">
+        <ul>
+          <li><a href="#quienes"><i class="fas fa-users"></i></a></li>
+          <li><a href="https://beacons.ai/burbanclothing" target="_blank" rel="noopener"><i class="fas fa-envelope"></i></a></li>
+        </ul>
+      </div>
+
+      <!-- Logo centrado -->
+      <div class="logo">
+        <a href="#">
+          <img src="Imagenes/logo_transparente.png" alt="Burban Clothing Logo" />
+        </a>
+      </div>
+
+      <!-- Menú derecho -->
+      <div class="nav-right">
+        <ul>
+          <li><a href="#" id="btnLogin"><i class="fas fa-sign-in-alt"></i></a></li>
+          <li><a href="carrito.html"><i class="fas fa-shopping-cart"></i></a></li>
+          <!-- Aquí aparece usuario y rol -->
+          <li id="usuarioInfo" style="color: white; margin-left: 10px;"></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <!-- Qué ofrecemos -->
+  <section class="ofrecemos">
+    <h1 style="text-align:center;">Qué ofrecemos</h1>
+    <div class="ofrecemos-contenedor">
+      <a href="agenda.html" class="item">
+        <img src="Imagenes/agenda.jpeg" alt="Agenda" />
+        <span>Agenda</span>
+      </a>
+      <a href="catalogo.html" class="item">
+        <img src="Imagenes/catalogo.jpeg" alt="Catálogo" />
+        <span>Catálogo</span>
+      </a>
+      <a href="foro.html" class="item">
+        <img src="Imagenes/foro.jpeg" alt="Foro" />
+        <span>Foro</span>
+      </a>
+    </div>
+  </section>
+
+  <main>
+    <section id="quienes" class="contenido">
+      <h2>Quiénes somos</h2>
+      <p>Después de varios años de dedicación y pasión, tenemos el placer de presentarles una página que nos llena de orgullo y emoción.</p>
+    
+      <p>BurbanClothing nace inspirado para todos los amantes del streetwear, con un enfoque especial en camisetas oversize para dama y caballero, seleccionadas cuidadosamente entre las mejores marcas nacionales, cumpliendo con los más altos estándares de calidad.</p>
+      
+      <p>Pero eso no es todo: también somos un estudio creativo especializado en fotografía y audiovisuales, dedicados a capturar momentos únicos y contar historias visuales impactantes. Nuestra misión es ofrecer no solo moda, sino también experiencias visuales exclusivas y auténticas que reflejen la cultura urbana y la esencia de cada persona.</p>
+      
+      <p>Queremos que cada seguidor se sienta parte de esta comunidad, disfrutando de contenido único, fresco y lleno de estilo.</p>
+      
+      <p>¡Esperamos que disfruten esta experiencia tanto como nosotros, y no olviden seguirnos para no perderse ningún detalle de nuestro trabajo!</p>
+    </section>
+  </main>
+
+  <!-- Modal login -->
+  <div id="modalFondo" style="display:none; position: fixed; top:0; left:0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000;"></div>
+
+  <div id="login" role="dialog" aria-modal="true" style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 8px; z-index: 1001; max-width: 320px; width: 90%;">
+    <button id="cerrarLogin" class="cerrar-btn" style="float: right; font-size: 20px; border:none; background:none; cursor:pointer;">&times;</button>
+    <h2>Inicio de sesión</h2>
+    <form id="loginForm">
+      <label for="usuario">Usuario:</label>
+      <input type="text" id="usuario" required />
+      
+      <label for="password">Contraseña:</label>
+      <input type="password" id="password" required />
+      
+      <label for="rol">Rol:</label>
+      <select id="rol" required>
+        <option value="">--Selecciona--</option>
+        <option value="admin">Administrador</option>
+        <option value="cliente">Cliente</option>
+      </select>
+
+      <button type="submit">Iniciar sesión</button>
+    </form>
+    <p id="mensaje" style="color: red; margin-top: 10px;"></p>
+  </div>    
+  <script src="css&scrip/script.js"></script>
+</body>
+</html>

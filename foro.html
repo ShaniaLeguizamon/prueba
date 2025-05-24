@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Foro de Comentarios</title>
+  <link rel="stylesheet" href="css&scrip/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <!-- Menú izquierdo -->
+      <div class="nav-left">
+        <ul>
+          <li>
+            <a href="blog.html">
+              <i class="fas fa-blog"></i> Blog
+            </a>
+          </li>
+          <li>
+            <a href="foro.html">
+              <i class="fas fa-comments"></i> Foro
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Logo centrado -->
+      <div class="logo">
+        <a href="index.html">
+          <img src="Imagenes/logo_transparente.png" alt="Burban Clothing Logo" />
+        </a>
+      </div>
+
+      <!-- Menú derecho -->
+      <div class="nav-right">
+        <ul>
+          <li><a href="#" onclick="mostrarSeccion('login')"><i class="fas fa-sign-in-alt"></i></a></li>
+          <li><a href="carrito.html"><i class="fas fa-shopping-cart"></i></a></li>
+          <li id="usuarioInfo" style="color: white; margin-left: 10px;"></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <!-- Qué ofrecemos -->
+  <div class="ofrecemos">
+    <div class="ofrecemos-contenedor">
+      <a href="agenda.html" class="item">
+        <img src="Imagenes/agenda.jpeg" alt="Agenda" />
+        <span>Agenda</span>
+      </a>
+      <a href="catalogo.html" class="item">
+        <img src="Imagenes/catalogo.jpeg" alt="Catálogo" />
+        <span>Catálogo</span>
+      </a>
+    </div>
+  </div>
+  <main>
+
+    <!-- Zona para que Admin publique -->
+    <section id="adminPanel" style="display:none;">
+      <h2>Publicar en Foro/Blog (Solo Admin)</h2>
+  
+      <form id="postForm">
+        <input type="text" id="postTitle" placeholder="Título" required /><br />
+        <textarea id="postContent" placeholder="Contenido" required></textarea><br />
+        <label>Foto de perfil:
+          <input type="file" id="photoInput" accept="image/*">
+        </label>    
+        <button type="submit">Publicar</button>
+      </form>
+    </section>
+  
+    <!-- Zona donde aparecen las publicaciones -->
+    <section id="postsContainer">
+      <h2>Publicaciones</h2>
+      <!-- Aquí se mostrarán las publicaciones -->
+    </section>
+    <div id="blogEntradas"></div>
+
+<input id="entradaInput" placeholder="Título nueva entrada" />
+<button id="btnPublicarEntrada">Publicar Entrada (Admin)</button>
+
+<div id="comentarios"></div>
+<textarea id="comentarioInput" placeholder="Escribe un comentario..."></textarea>
+<button id="btnPublicarComentario">Publicar Comentario</button>
+  
+  </main>
+  <script src="css&scrip/foro.js"></script>
+  <script src="css&scrip/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Agenda de Servicios</title>
+  <link rel="stylesheet" href="css&scrip/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="agenda-page"> <header>
+    <div class="navbar">
+      <div class="nav-left">
+        <ul>
+          <li><a href="#agendaForm"><i class="fas fa-calendar-alt"></i></a></li>
+          <li><a href="https://www.instagram.com/david_burbano_ph/?igsh=dHIzdGVxazByaHAy#" target="_blank" rel="noopener"><i class="fas fa-envelope"></i></a></li>
+        </ul>
+      </div>
+
+      <div class="logo">
+        <a href="index.html">
+          <img src="Imagenes/logo_transparente.png" alt="Burban Clothing Logo" />
+        </a>
+      </div>
+
+      <div class="nav-right">
+        <ul>
+          <li><a href="#" id="btnLogin"><i class="fas fa-sign-in-alt"></i></a></li>
+          <li><a href="carrito.html"><i class="fas fa-shopping-cart"></i></a></li>
+          <li id="usuarioInfo" style="color: white; margin-left: 10px;"></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <div class="ofrecemos">
+    <div class="ofrecemos-contenedor">
+      <a href="catalogo.html" class="item">
+        <img src="Imagenes/catalogo.jpeg" alt="Catálogo" />
+        <span>Catálogo</span>
+      </a>
+      <a href="foro.html" class="item">
+        <img src="Imagenes/foro.jpeg" alt="Foro" />
+        <span>Foro</span>
+      </a>
+    </div>
+  </div>
+
+  <main>
+    <h2>Reserva tu sesión fotográfica</h2>
+    <form id="agendaForm" onsubmit="enviarWhatsApp(event)">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" required>
+      <label for="fecha">Fecha:</label>
+      <input type="date" id="fecha" required>
+      <label for="hora">Hora:</label>
+      <input type="time" id="hora" required>
+      <button type="submit">Agendar</button>
+    </form>
+    <div id="mensajeAgenda"></div>
+  </main>
+
+  <div id="modalFondo"></div>
+
+  <div id="login" role="dialog" aria-modal="true">
+    <button id="cerrarLogin" class="cerrar-btn">&times;</button>
+    <h2>Inicio de sesión</h2>
+    <form id="loginForm">
+      <label for="usuario">Usuario:</label>
+      <input type="text" id="usuario" required />
+
+      <label for="password">Contraseña:</label>
+      <input type="password" id="password" required />
+
+      <label for="rol">Rol:</label>
+      <select id="rol" required>
+        <option value="">--Selecciona--</option>
+        <option value="admin">Administrador</option>
+        <option value="cliente">Cliente</option>
+      </select>
+
+      <button type="submit">Iniciar sesión</button>
+    </form>
+    <p id="mensaje" style="color: red;"></p>
+  </div>
+
+  <script src="css&scrip/Agendascript.js"></script>
+  <script src="css&scrip/script.js"></script>
+</body>
+</html>
