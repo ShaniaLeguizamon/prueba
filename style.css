@@ -1,0 +1,1073 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Colores principales */
+:root {
+  --bg-color: #000000;
+  --text-color: #ffffff;
+  --accent-color: #C1FF00;
+  --input-bg: #111111;
+  --input-border: #444444;
+  --comment-bg: rgba(193, 255, 0, 0.1);
+  --shadow-color: rgba(193, 255, 0, 0.3);
+}
+
+/* Estilos generales */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Arial', sans-serif;
+  line-height: 1.5;
+  scroll-behavior: smooth; /* Added for smooth scrolling to sections */
+}
+
+/* ------------------------
+   Navbar (General for all pages)
+-------------------------*/
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--bg-color);
+  z-index: 1000; /* Muy alto para estar encima */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  min-height: 100px; /* Ensure enough height for logo and content */
+}
+
+.navbar .logo {
+  flex-grow: 0; /* Prevent logo from taking too much space */
+}
+
+.navbar .logo img {
+  height: 80px; /* Adjust logo size in navbar for general use */
+}
+
+.navbar h1 { /* Style for header on cart page and agenda page */
+  flex-grow: 1;
+  text-align: center;
+  color: var(--accent-color);
+  margin: 0;
+  font-size: 2rem;
+}
+
+/* Menús izquierdo y derecho (Desktop) */
+.nav-left,
+.nav-right {
+  display: flex;
+  align-items: center; /* Align items vertically in flex container */
+}
+
+.nav-left ul,
+.nav-right ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-left li,
+.nav-right li {
+  display: inline;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s;
+}
+
+.navbar a:hover {
+  color: var(--accent-color);
+}
+
+.navbar a i {
+  margin-right: 8px;
+}
+
+/* Logo centrado (on index.html for desktop) */
+body:not(.carrito-page):not(.agenda-page) .navbar .logo {
+  flex: 1; /* Allows it to take available space in the middle on index.html */
+}
+body:not(.carrito-page):not(.agenda-page) .navbar .logo img {
+    height: 100px; /* Default logo height for index page */
+}
+
+/* ------------------------
+   Global Content Padding for Fixed Header (Desktop)
+-------------------------*/
+/* Adjusts main content and sections to sit below the fixed navbar */
+/* This applies to pages with the full navbar from index.html by default */
+main, .ofrecemos {
+  padding-top: 140px; /* Adjust according to navbar height to prevent overlap */
+}
+
+/* Specific adjustment for carrito.html's main content */
+body.carrito-page main {
+    padding-top: 20px; /* Smaller top padding within the main content */
+    margin-top: 120px; /* Push main content down to clear fixed header */
+}
+
+/* Specific adjustment for agenda.html's main content */
+body.agenda-page main {
+  padding-top: 20px; /* Smaller top padding within the main content */
+  margin-top: 120px; /* Push content down to clear fixed header */
+  max-width: 600px; /* Adjust max-width for the form for better aesthetics */
+}
+
+/* Fondo semitransparente para modal (overlay) */
+#modalFondo {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.8); /* más oscuro para el fondo */
+  z-index: 1000;
+}
+
+/* Modal para login */
+#login {
+  display: none;
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #000; /* fondo negro */
+  color: #fff; /* texto blanco */
+  border: 2px solid var(--accent-color); /* borde lima */
+  padding: 2em;
+  border-radius: 10px;
+  z-index: 1001;
+  max-width: 400px;
+  width: 90%; /* Responsive width */
+  box-shadow: 0 0 20px var(--accent-color); /* sombra lima */
+  font-family: Arial, sans-serif;
+}
+
+/* Botón cerrar modal */
+.cerrar-btn {
+  position: absolute;
+  top: 10px; right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.cerrar-btn:hover {
+  color: var(--accent-color);
+}
+
+/* Estilo para inputs y select en modals */
+#login input,
+#login select {
+  width: 100%;
+  padding: 0.6em;
+  margin-top: 0.3em;
+  margin-bottom: 1em;
+  border: 1px solid var(--accent-color);
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  border-radius: 5px;
+}
+
+/* Botón enviar en modals */
+#login button[type="submit"] {
+  background-color: var(--accent-color);
+  color: #000;
+  padding: 0.7em 1.2em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#login button[type="submit"]:hover {
+  background-color: #aaff00;
+}
+
+/* ------------------------
+   Hamburger Menu Button (Hidden by default on Desktop)
+-------------------------*/
+.menu-toggle {
+  display: none; /* Hidden by default on larger screens */
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: color 0.3s ease;
+}
+
+.menu-toggle:hover {
+  color: var(--accent-color);
+}
+
+/* ------------------------
+   Main Content Sections (General Styling)
+-------------------------*/
+main {
+  padding: 30px 20px;
+  background-color: #111;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(193, 255, 0, 0.3);
+  max-width: 900px; /* Default max-width for main sections on desktop */
+  margin: 40px auto; /* Center main content horizontally on desktop */
+}
+
+/* Sección "Quiénes somos" */
+#quienes {
+  max-width: 1300px; /* Broader width for this specific section */
+  margin: 60px auto; /* Center it */
+  padding: 20px; /* Added general padding */
+  color: #eee;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  text-align: left;
+  background-color: #111; /* Ensure background for effect */
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+#quienes h2 {
+  font-weight: 600;
+  font-size: 2.5rem;
+  color: var(--accent-color);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+#quienes p {
+  margin-bottom: 1.3rem;
+  font-size: 1.1rem;
+  color: #ccc;
+}
+
+#quienes:hover {
+  box-shadow: 0 0 30px var(--accent-color);
+  border-radius: 15px; /* Keep consistent border-radius */
+}
+
+/* General titles */
+h1, h2 {
+  color: var(--accent-color);
+  margin-bottom: 10px;
+}
+
+/* ------------------------
+   "Qué ofrecemos" Section
+-------------------------*/
+.ofrecemos-contenedor {
+  display: flex;
+  justify-content: center;
+  gap: 40px; /* Space between items */
+  flex-wrap: wrap; /* Allow items to wrap to next line */
+  margin-top: 20px;
+  animation: fadeInUp 1.2s ease;
+}
+
+.item {
+  text-align: center;
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+  padding: 15px;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 20px rgba(193, 255, 0, 0.2);
+  border: 2px solid transparent;
+  backdrop-filter: blur(5px);
+  cursor: pointer;
+  /* Desktop specific sizing for items */
+  flex: 0 0 auto; /* Prevent items from growing/shrinking by default */
+  min-width: 300px; /* A minimum width before wrapping */
+  max-width: 350px; /* Fixed width for consistency on desktop */
+}
+
+.item img {
+  width: 350px; /* Fixed width for desktop */
+  height: 350px; /* Fixed height for desktop */
+  object-fit: cover;
+  border-radius: 25px;
+  margin-bottom: 10px;
+  border: 3px solid var(--accent-color);
+  transition: transform 0.3s ease;
+}
+
+.item span {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--accent-color);
+  transition: color 0.3s ease;
+}
+
+/* Hover effects */
+.item:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 0 30px var(--accent-color);
+  background: linear-gradient(135deg, var(--accent-color) 10%, #111 90%);
+  border-color: var(--accent-color);
+}
+
+.item:hover span {
+  color: #000;
+}
+
+.item:hover img {
+  transform: scale(1.1);
+}
+
+/* Fade In Up animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ------------------------
+   Carrito Specific Styles
+-------------------------*/
+.carrito-container {
+  margin-top: 20px;
+}
+
+.producto-carrito {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0c0c0c;
+  border: 1px solid var(--accent-color);
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 0 10px rgba(193, 255, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.producto-carrito:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px var(--accent-color);
+}
+
+.producto-nombre {
+  font-weight: bold;
+  color: var(--accent-color);
+  font-size: 1.1rem;
+}
+
+.producto-talla,
+.producto-color {
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
+.producto-acciones {
+  display: flex;
+  align-items: center;
+}
+
+.producto-precio {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  font-weight: bold;
+  margin-right: 15px;
+}
+
+.eliminar-producto-btn {
+  background-color: transparent;
+  border: none;
+  color: #ff4d4d;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.eliminar-producto-btn:hover {
+  color: #ff0000;
+}
+
+.total-carrito {
+  text-align: right;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--accent-color);
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 2px dashed #333;
+}
+
+.empty-cart-message {
+  text-align: center;
+  color: #ccc;
+  font-size: 1.2rem;
+  padding: 40px 0;
+}
+
+.clear-cart-btn {
+  display: block;
+  width: fit-content;
+  margin: 30px auto 0 auto;
+  background-color: #ff4d4d;
+  color: #fff;
+  border: none;
+  padding: 12px 25px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.clear-cart-btn:hover {
+  background-color: #ff0000;
+}
+
+.delivery-details, .purchase-confirmation {
+  background-color: #1a1a1a;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(193, 255, 0, 0.3);
+  padding: 20px;
+  margin-top: 30px;
+}
+
+.delivery-details h2, .purchase-confirmation h2 {
+  color: var(--accent-color);
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.delivery-details form label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+.delivery-details form input[type="text"],
+.delivery-details form input[type="tel"],
+.delivery-details form input[type="number"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid var(--accent-color);
+  border-radius: 8px;
+  background-color: #0c0c0c;
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+.delivery-details form input[type="text"]:focus,
+.delivery-details form input[type="tel"]:focus,
+.delivery-details form input[type="number"]:focus {
+  outline: none;
+  border-color: #aaff00;
+  box-shadow: 0 0 5px #aaff00;
+}
+
+#finalizePurchaseBtn {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  border: none;
+  padding: 15px 30px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+#finalizePurchaseBtn:hover {
+  background-color: #aaff00;
+}
+
+.purchase-confirmation p {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  color: #ccc;
+}
+
+.continue-shopping-btn {
+  display: block;
+  width: fit-content;
+  margin: 30px auto 0 auto;
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  border: none;
+  padding: 12px 25px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.continue-shopping-btn:hover {
+  background-color: #aaff00;
+}
+
+/* ------------------------
+   Agenda Form Styles
+-------------------------*/
+#agendaForm {
+  background-color: #1a1a1a;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(193, 255, 0, 0.3);
+  padding: 30px;
+  margin-top: 20px;
+}
+
+#agendaForm h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  color: var(--accent-color); /* Ensure heading color consistency */
+}
+
+#agendaForm label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--text-color);
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+#agendaForm input[type="text"],
+#agendaForm input[type="date"],
+#agendaForm input[type="time"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid var(--accent-color);
+  border-radius: 8px;
+  background-color: #0c0c0c;
+  color: var(--text-color);
+  font-size: 1rem;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+}
+
+#agendaForm input[type="text"]:focus,
+#agendaForm input[type="date"]:focus,
+#agendaForm input[type="time"]:focus {
+  outline: none;
+  border-color: #aaff00;
+  box-shadow: 0 0 8px #aaff00;
+}
+
+#agendaForm button[type="submit"] {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  border: none;
+  padding: 15px 30px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+#agendaForm button[type="submit"]:hover {
+  background-color: #aaff00;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.6);
+}
+
+#mensajeAgenda {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.1rem;
+  color: var(--accent-color);
+  font-weight: bold;
+}
+
+/* ------------------------
+   Roles estilo Foro (Consistent styling)
+-------------------------*/
+#adminPanel {
+  background: #111;
+  border: 2px solid var(--accent-color);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px var(--shadow-color);
+  margin-bottom: 40px;
+}
+
+#adminPanel h2 {
+  color: var(--accent-color);
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+#adminPanel form input[type="text"],
+#adminPanel form textarea,
+#adminPanel form input[type="file"] {
+  width: 100%;
+  background: var(--input-bg);
+  border: 1.5px solid var(--input-border);
+  color: var(--text-color);
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+#adminPanel form input[type="text"]:focus,
+#adminPanel form textarea:focus,
+#adminPanel form input[type="file"]:focus {
+  border-color: var(--accent-color);
+  outline: none;
+}
+
+#adminPanel form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+#adminPanel form button {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  border: none;
+  padding: 12px 25px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+#adminPanel form button:hover {
+  background-color: #aaff00cc;
+}
+
+/* Contenedor de publicaciones */
+#postsContainer {
+  background: #111;
+  border-radius: 15px;
+  box-shadow: 0 0 15px var(--shadow-color);
+  padding: 20px;
+  margin-bottom: 40px;
+}
+
+#postsContainer h2 {
+  color: var(--accent-color);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+/* Each post */
+.post {
+  border-bottom: 1px solid #222;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.post:last-child {
+  border-bottom: none;
+}
+
+.post h3 {
+  color: var(--accent-color);
+  font-weight: 700;
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+}
+
+.post p {
+  color: var(--text-color);
+  font-size: 1rem;
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+}
+
+.post img {
+  max-width: 100%;
+  border-radius: 15px;
+  margin-top: 10px;
+  box-shadow: 0 0 8px var(--shadow-color);
+}
+
+/* Comments */
+#comentarios {
+  background: #111;
+  padding: 15px 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px var(--shadow-color);
+  margin-bottom: 25px;
+}
+
+.comentario {
+  background: var(--comment-bg);
+  border-radius: 12px;
+  padding: 10px 15px;
+  margin-bottom: 12px;
+  color: var(--text-color);
+  font-size: 0.95rem;
+}
+
+.comentario strong {
+  color: var(--accent-color);
+  font-weight: 700;
+  margin-right: 8px;
+}
+
+/* Comment input */
+#comentarioInput {
+  width: 100%;
+  min-height: 80px;
+  background: var(--input-bg);
+  border: 1.5px solid var(--input-border);
+  border-radius: 12px;
+  padding: 10px;
+  color: var(--text-color);
+  font-size: 1rem;
+  resize: vertical;
+  margin-bottom: 15px;
+  transition: border-color 0.3s;
+}
+
+#comentarioInput:focus {
+  border-color: var(--accent-color);
+  outline: none;
+}
+
+/* Publish comment button */
+#btnPublicarComentario {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  border: none;
+  padding: 12px 25px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+#btnPublicarComentario:hover {
+  background-color: #aaff00cc;
+}
+
+/* New post input (admin) */
+#entradaInput {
+  width: 70%;
+  background: var(--input-bg);
+  border: 1.5px solid var(--input-border);
+  border-radius: 12px;
+  padding: 10px;
+  color: var(--text-color);
+  font-size: 1rem;
+  margin-right: 15px;
+  transition: border-color 0.3s;
+}
+
+#entradaInput:focus {
+  border-color: var(--accent-color);
+  outline: none;
+}
+
+#btnPublicarEntrada {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  border: none;
+  padding: 12px 25px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#btnPublicarEntrada:hover {
+  background-color: #aaff00cc;
+}
+
+/* ------------------------
+   Responsive - Mobile (applies to screens up to 768px wide)
+-------------------------*/
+@media (max-width: 768px) {
+  .navbar {
+    flex-wrap: wrap; /* Allow items to wrap onto the next line */
+    padding: 15px 20px;
+    min-height: auto; /* Allow navbar to collapse height on mobile */
+    flex-direction: column; /* Stack items vertically by default */
+    align-items: flex-start; /* Align items to the start when stacked */
+  }
+
+  /* Hamburger menu button for mobile */
+  .menu-toggle {
+    display: block; /* Show the hamburger menu button */
+    position: absolute; /* Position relative to navbar */
+    top: 25px; /* Adjust as needed */
+    right: 20px; /* Adjust as needed */
+  }
+
+  /* Adjust logo for mobile (index.html) */
+  body:not(.carrito-page):not(.agenda-page) .navbar .logo {
+      order: 0;
+      width: 100%;
+      justify-content: center;
+      margin-bottom: 10px;
+  }
+  body:not(.carrito-page):not(.agenda-page) .navbar .logo img {
+      height: 60px; /* Smaller logo on mobile */
+  }
+
+  /* Hide nav items by default (will be shown by JS on menu-active) */
+  .nav-left,
+  .nav-right {
+    display: none;
+    flex-direction: column; /* Stack vertically */
+    width: 100%;
+    background-color: var(--bg-color);
+    border-top: 1px solid var(--accent-color);
+    padding: 15px 0;
+    order: 3; /* Place after logo and potential title */
+  }
+
+  /* Show menus when navbar has 'menu-active' class (controlled by JS) */
+  .navbar.menu-active .nav-left,
+  .navbar.menu-active .nav-right {
+    display: flex;
+  }
+
+  /* List items vertical stacking */
+  .nav-left ul,
+  .nav-right ul {
+    flex-direction: column;
+    gap: 12px;
+    padding-left: 0;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-left li,
+  .nav-right li {
+    display: block; /* Make list items take full width */
+  }
+
+  .navbar a {
+    justify-content: center; /* Center text/icons in mobile menu */
+    font-size: 1.1rem;
+    padding: 10px 0;
+  }
+
+  /* Mobile specific adjustments for carrito.html header */
+  body.carrito-page .navbar {
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 15px; /* Add padding at bottom for content clearance */
+  }
+  body.carrito-page .navbar .logo {
+      margin-bottom: 10px;
+  }
+  body.carrito-page .navbar h1 {
+      font-size: 1.5rem; /* Smaller title on mobile */
+      text-align: center;
+      width: 100%; /* Ensure title takes full width */
+  }
+
+  /* Mobile specific adjustments for agenda.html header */
+  body.agenda-page .navbar {
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 15px;
+  }
+  body.agenda-page .navbar .logo {
+      margin-bottom: 10px;
+  }
+  body.agenda-page .navbar h1 { /* If you add an h1 to agenda header, use this */
+      font-size: 1.5rem;
+      text-align: center;
+      width: 100%;
+  }
+
+
+  /* Adjust main content padding for mobile to clear header */
+  main, .ofrecemos {
+    padding-top: 100px; /* Adjust for a potentially smaller mobile navbar, or more if menu is expanded */
+    margin: 20px auto; /* Adjust margin for mobile */
+    max-width: 95%; /* Allow main content to take more width on smaller screens */
+    padding: 15px; /* Reduce padding inside main for mobile */
+  }
+
+  /* Specific page main adjustments for mobile */
+  body.carrito-page main,
+  body.agenda-page main {
+    margin-top: 100px; /* Adjust margin-top for these pages on mobile */
+    padding: 15px;
+    max-width: 95%;
+  }
+
+  /* Qué ofrecemos section adjustments */
+  .ofrecemos-contenedor {
+    gap: 20px; /* Reduce gap between items on mobile */
+  }
+  .item {
+    padding: 10px; /* Reduce padding for item boxes */
+    min-width: unset; /* Remove fixed min-width for mobile */
+    max-width: 48%; /* Allow two items per row, with gap */
+    width: 100%; /* Default to full width, adjusted by flex for two columns */
+  }
+  .item img {
+    width: 100%; /* Make images fluid within their container */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 250px; /* Limit image size within item */
+    max-height: 250px; /* Limit image size within item */
+  }
+  .item span {
+    font-size: 1rem; /* Smaller text for item names */
+  }
+
+  /* Quiénes somos section adjustments */
+  #quienes {
+    padding: 15px; /* Reduce padding */
+    margin: 30px auto; /* Adjust margin */
+    font-size: 0.95rem; /* Slightly smaller text */
+  }
+  #quienes h2 {
+    font-size: 2rem;
+  }
+
+  /* Form and button adjustments */
+  #agendaForm, .delivery-details, .purchase-confirmation, #adminPanel, #postsContainer, #comentarios {
+    padding: 15px; /* Consistent padding reduction for forms/panels */
+  }
+  #agendaForm label,
+  .delivery-details form label {
+    font-size: 1rem; /* Smaller font for labels */
+  }
+  #agendaForm input, #agendaForm button,
+  .delivery-details form input, .delivery-details form button,
+  #adminPanel form input[type="text"], #adminPanel form textarea, #adminPanel form button,
+  #comentarioInput, #btnPublicarComentario, #entradaInput, #btnPublicarEntrada {
+    padding: 10px; /* Smaller padding for inputs/buttons */
+    font-size: 1rem; /* Smaller font size for inputs/buttons */
+  }
+  .purchase-confirmation p {
+    font-size: 1rem;
+  }
+  .clear-cart-btn, .continue-shopping-btn, #finalizePurchaseBtn {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+  .total-carrito {
+    font-size: 1.3rem;
+  }
+}
+
+/* ------------------------
+   Responsive - Smaller Mobile (applies to screens up to 480px wide)
+-------------------------*/
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px 15px;
+  }
+
+  .menu-toggle {
+    top: 15px;
+    right: 15px;
+    font-size: 1.5rem;
+  }
+
+  .logo img {
+    height: 50px; /* Even smaller logo */
+  }
+
+  /* Adjust main content padding for even smaller mobile */
+  main, .ofrecemos {
+    padding-top: 80px; /* Adjust for potentially shorter navbar */
+    margin: 10px auto; /* Reduce overall margin */
+    padding: 10px; /* Even less padding */
+  }
+
+  body.carrito-page main,
+  body.agenda-page main {
+    margin-top: 80px; /* Further adjust margin-top */
+    padding: 10px;
+  }
+
+  .ofrecemos-contenedor {
+    gap: 15px; /* Reduce gap between items */
+  }
+
+  .item {
+    padding: 8px; /* Further reduce item padding */
+    max-width: 100%; /* Ensure items stack vertically on very small screens */
+  }
+  .item img {
+    max-width: 150px; /* Smallest image size */
+    max-height: 150px;
+  }
+  .item span {
+    font-size: 0.85rem;
+  }
+
+  #quienes h2 {
+    font-size: 1.5rem;
+  }
+
+  #quienes p {
+    font-size: 0.85rem;
+  }
+
+  /* Specific form adjustments for smallest mobile */
+  #agendaForm, .delivery-details, .purchase-confirmation, #adminPanel, #postsContainer, #comentarios {
+    padding: 10px;
+  }
+  #agendaForm label,
+  .delivery-details form label {
+    font-size: 0.9rem;
+  }
+  #agendaForm input, #agendaForm button,
+  .delivery-details form input, .delivery-details form button,
+  #adminPanel form input[type="text"], #adminPanel form textarea, #adminPanel form button,
+  #comentarioInput, #btnPublicarComentario, #entradaInput, #btnPublicarEntrada {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+  .purchase-confirmation p {
+    font-size: 0.95rem;
+  }
+  .clear-cart-btn, .continue-shopping-btn, #finalizePurchaseBtn {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+  .total-carrito {
+    font-size: 1.1rem;
+  }
+}
